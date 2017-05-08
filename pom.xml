@@ -10,7 +10,7 @@
     <groupId>com.agfa.jenkins.plugins</groupId>
     <artifactId>require-interactive</artifactId>
     <packaging>hpi</packaging>
-    <version>1.2</version>
+    <version>1.3-SNAPSHOT</version>
     <name>require-interactive</name>
     <url>http://wikihealthcare.agfa.net/display/JEN/Require+Interactive</url>
 
@@ -18,7 +18,7 @@
 		<connection>scm:git:git@github.com:huybrechts/require-interactive.git</connection>
 		<developerConnection>scm:git:git@github.com:huybrechts/require-interactive.git</developerConnection>
 		<url>https://github.com/huybrechts/require-interactive</url>
-	  <tag>require-interactive-1.2</tag>
+	  <tag>HEAD</tag>
   </scm>
 
     <properties>
