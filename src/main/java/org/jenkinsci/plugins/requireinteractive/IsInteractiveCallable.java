@@ -4,12 +4,14 @@ import hudson.model.TaskListener;
 import hudson.remoting.Callable;
 import org.jenkinsci.remoting.RoleChecker;
 
+import javax.imageio.ImageIO;
 import java.awt.AWTException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -25,6 +27,7 @@ class IsInteractiveCallable implements Callable<Boolean, IOException> {
 
     @Override
     public Boolean call() {
+        File f = null;
         try {
             if (GraphicsEnvironment.isHeadless()) {
                 return false;
@@ -39,6 +42,9 @@ class IsInteractiveCallable implements Callable<Boolean, IOException> {
 
             final int ymax = ymin + img.getHeight();
             final int xmax = xmin + img.getWidth();
+
+            f = File.createTempFile(getClass().getName().toString(), ".png");
+            ImageIO.write(img, "png", f);
 
             outer:
             for (int i = xmin; i < xmax; i++) {
@@ -55,6 +61,13 @@ class IsInteractiveCallable implements Callable<Boolean, IOException> {
                 e.printStackTrace(listener.getLogger());
             }
             return null;
+        } catch (IOException e) {
+            if (listener != null) {
+                e.printStackTrace(listener.getLogger());
+            }
+            return null;
+        } finally {
+            if (f != null) f.delete();
         }
     }
 

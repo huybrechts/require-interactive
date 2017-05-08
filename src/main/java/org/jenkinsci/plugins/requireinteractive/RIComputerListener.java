@@ -24,6 +24,7 @@ public class RIComputerListener extends ComputerListener {
             Boolean ia = channel.call(new IsInteractiveCallable(listener));
             if (ia == null || !ia.booleanValue()) {
                 listener.error("Aborted launch since this slaves requires an interactive display, and it is not available");
+                channel.callAsync(new ExitCallable());
                 channel.close(new NoInteractiveDisplayException(c));
                 throw new NoInteractiveDisplayException(c);
             }

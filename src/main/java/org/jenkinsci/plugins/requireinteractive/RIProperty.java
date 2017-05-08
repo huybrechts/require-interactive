@@ -22,5 +22,4 @@ public class RIProperty extends NodeProperty<Node> {
 
     }
 
-
 }
